@@ -517,13 +517,47 @@ const relatedPosts = blogPosts
 
     // CPA Locker trigger functions - make them globally accessible
     window.triggerContentLocker = function() {
-      // Direct redirect to CPA Grip content locker
-      window.location.href = 'https://quartzfiles.com/lock.php?id=1894762';
+      // Load CPA Grip content locker scripts dynamically
+      var lckScript = document.createElement('script');
+      lckScript.type = 'text/javascript';
+      lckScript.text = 'var lck = false;';
+      document.body.appendChild(lckScript);
+
+      var lockerScript = document.createElement('script');
+      lockerScript.type = 'text/javascript';
+      lockerScript.src = 'https://quartzfiles.com/script_include.php?id=1894762&tracking_id=';
+      lockerScript.async = true;
+      document.body.appendChild(lockerScript);
+
+      // Check if locker was loaded after a short delay
+      setTimeout(function() {
+        var checkScript = document.createElement('script');
+        checkScript.type = 'text/javascript';
+        checkScript.text = "if(!lck){top.location = 'https://quartzfiles.com/help/ablk.php?lkt=1'; }";
+        document.body.appendChild(checkScript);
+      }, 1000);
     };
 
     window.triggerVideoLocker = function() {
-      // Direct redirect to CPA Grip video locker
-      window.location.href = 'https://quartzfiles.com/lock.php?id=1894955';
+      // Load CPA Grip video locker scripts dynamically
+      var lckScript = document.createElement('script');
+      lckScript.type = 'text/javascript';
+      lckScript.text = 'var lck = false;';
+      document.body.appendChild(lckScript);
+
+      var lockerScript = document.createElement('script');
+      lockerScript.type = 'text/javascript';
+      lockerScript.src = 'https://quartzfiles.com/script_include.php?id=1894955&tracking_id=';
+      lockerScript.async = true;
+      document.body.appendChild(lockerScript);
+
+      // Check if locker was loaded after a short delay
+      setTimeout(function() {
+        var checkScript = document.createElement('script');
+        checkScript.type = 'text/javascript';
+        checkScript.text = "if(!lck){top.location = 'https://quartzfiles.com/help/ablk.php?lkt=1'; }";
+        document.body.appendChild(checkScript);
+      }, 1000);
     };
   </script>
 </BaseLayout>
