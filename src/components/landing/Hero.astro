@@ -1,0 +1,65 @@
+---
+const featuresList = [
+  {
+    title: "AI Code Generator",
+    description: "Build monetization features in seconds.",
+  },
+  {
+    title: "Content Gating API",
+    description: "Control access to any digital content.",
+  },
+  {
+    title: "Lead Capture SDK",
+    description: "Collect leads from gated content.",
+  },
+  {
+    title: "Developer Docs",
+    description: "Free integration guides & examples.",
+  },
+];
+---
+
+<section class="relative overflow-hidden dark:bg-base-950">
+  <!-- Gradient background -->
+  <div class="absolute inset-0 bg-gradient-to-b from-accent-50/30 via-transparent to-transparent dark:from-accent-950/30 pointer-events-none"></div>
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-accent-400/10 dark:bg-accent-500/10 rounded-full blur-3xl pointer-events-none"></div>
+  
+  <div class="px-8 pt-32 mx-auto md:px-12 lg:px-24 max-w-7xl relative">
+    <div class="max-w-2xl text-center mx-auto lg:text-balance mb-10">
+      <p class="text-sm leading-normal font-bold uppercase text-transparent bg-clip-text bg-gradient-to-r from-accent-600 to-accent-400 dark:from-accent-400 dark:to-accent-300">
+        UnlockOps
+      </p>
+      <h2
+        class="text-xl/snug leading-tight tracking-tight sm:text-2xl/snug md:text-3xl/snug capitalize lg:text-4xl/snug mt-4 font-medium text-base-900 dark:text-base-100 bg-clip-text text-transparent bg-gradient-to-r from-accent-600 to-accent-500 dark:from-white dark:to-base-200">
+        Monetization infrastructure for developers
+      </h2>
+      <p class="text-base leading-normal mt-4 text-base-500 dark:text-base-400 font-medium">
+        Add content gating, lead capture, and monetization to any app with AI-generated code. 
+        Free SDKs, no credit card required.
+      </p>
+      <div
+        class="flex flex-wrap items-center gap-2 justify-center mx-auto mt-12">
+        <a
+          href="/signup"
+          class="flex items-center justify-center transition-all duration-200 focus:ring-2 focus:outline-none text-white bg-gradient-to-r from-accent-600 to-accent-500 hover:from-accent-700 hover:to-accent-600 focus:ring-accent-700/50 h-9 px-4 py-2 text-sm font-medium rounded-md">
+          Start building — free
+        </a>
+        <a
+          href="/#features"
+          class="flex items-center justify-center transition-all duration-200 focus:ring-2 focus:outline-none text-base-600 dark:text-base-300 bg-base-50 dark:bg-base-800 hover:bg-accent-100 dark:hover:bg-accent-900/50 ring-1 ring-base-300 dark:ring-base-600 focus:ring-accent-500 hover:text-accent-600 h-9 px-4 py-2 text-sm font-medium rounded-md">
+          View documentation
+        </a>
+      </div>
+    </div>
+    <div
+      class="lg:gap-x-8 lg:grid-cols-4 max-w-4xl mt-8 mx-auto sm:gap-x-6 sm:gap-y-12 sm:grid sm:grid-cols-2 sm:space-y-0 space-y-6 text-center text-sm items-start">
+      {
+        featuresList.map(({ title, description }) => (
+          <div class="text-base-500 dark:text-base-400 lg:text-balance">
+            <strong class="text-base-700 dark:text-base-300">{title}</strong> ━ {description}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

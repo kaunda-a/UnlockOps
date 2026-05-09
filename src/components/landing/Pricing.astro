@@ -1,0 +1,478 @@
+<section class="pt-20" x-data="{duration: 'monthly'}">
+  <div class="mx-auto w-full lg:px-24 max-w-7xl md:px-12 items-center px-8">
+    <div class="max-w-xl text-center mx-auto">
+      <p class="text-sm leading-normal font-bold uppercase text-transparent bg-clip-text bg-gradient-to-r from-accent-600 to-accent-400 dark:from-accent-400 dark:to-accent-300">
+        Tagline
+      </p>
+      <h2
+        class="text-xl leading-tight tracking-tight sm:text-2xl md:text-3xl capitalize lg:text-4xl mt-4 font-medium text-base-900 dark:text-base-100 lg:text-balance bg-clip-text text-transparent bg-gradient-to-r from-accent-700 to-accent-500 dark:from-white dark:to-base-200">
+        Start free. Scale as you grow.
+      </h2>
+      <p
+        class="text-base leading-normal mt-4 text-base-500 dark:text-base-400 font-medium lg:text-balance">
+        Free forever tier for testing. No credit card required.
+      </p>
+      <div
+        aria-labelledby="pricing-toggle"
+        class="w-full relative mt-8 ring-1 ring-base-200 dark:ring-base-600 ring-offset-2 bg-base-50 dark:bg-base-800 overflow-hidden justify-center gap-4 mx-auto lg:mx-0 inline-flex p-1 rounded-md max-w-52 shadow z-0">
+        <div
+          class="absolute inset-0 bg-base-200 dark:bg-base-700 rounded-md transition-transform duration-200 ease-in-out"
+          :class="duration === 'monthly' ? 'w-1/2 translate-x-0' : 'w-1/2 translate-x-full'">
+        </div>
+        <button
+          id="monthly-pricing-button"
+          class="relative flex items-center justify-center w-full px-2 h-6 text-xs font-medium focus:outline-none transition-colors duration-300 z-10"
+          :class="duration === 'monthly' ? 'text-accent-600' : 'text-base-500 hover:text-accent-500'"
+          @click="duration = 'monthly'"
+          type="button"
+          :aria-pressed="duration === 'monthly'">
+          Monthly
+        </button>
+        <button
+          id="annual-pricing-button"
+          class="relative flex items-center justify-center w-full px-2 h-6 text-xs font-medium focus:outline-none transition-colors duration-300 z-10"
+          :class="duration === 'annual' ? 'text-accent-600' : 'text-base-500 hover:text-accent-500'"
+          @click="duration = 'annual'"
+          type="button"
+          :aria-pressed="duration === 'annual'">
+          Annual
+        </button>
+      </div>
+    </div>
+    <div
+      class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-12 mx-auto">
+      <!-- Tier one -->
+      <div
+          class="flex flex-col h-full p-1 lg:py-1 rounded-3xl bg-base-100 dark:bg-base-800 ring-4 ring-base-50 dark:ring-base-900 border border-base-200 dark:border-base-700">
+        <div>
+          <div class="flex flex-col gap-4 p-8 bg-base-50 dark:bg-base-900 rounded-[1.3rem] h-full">
+            <div class="flex items-start justify-between w-full">
+              <div>
+                <h3
+                  class="text-lg leading-normal sm:text-xl md:text-2xl font-medium text-base-900 dark:text-base-100">
+                  Free Forever
+                </h3>
+                <p class="text-base leading-normal font-medium text-base-500 dark:text-base-400">
+                  For testing & learning
+                </p>
+              </div>
+            </div>
+            <p class="text-base leading-normal font-medium text-base-500 dark:text-base-400">
+              Perfect for testing and learning the API. No credit card required.
+            </p>
+          </div>
+        </div>
+        <div class="p-8">
+          <p
+            class="font-semibold flex lg:text-3xl items-baseline text-2xl tracking-tighter text-base-900 dark:text-base-100">
+            Free
+          </p>
+            <span
+              class="text-sm font-normal font-sans tracking-normal text-base-500 dark:text-base-400">
+              <span x-show="duration === 'monthly'">/month</span>
+              <span x-show="duration === 'annual'" style="display: none">
+                /annually
+              </span>
+            </span>
+          </p>
+          <div class="w-full mt-4">
+            <a
+              href="/signup"
+              class="flex items-center justify-center transition-all duration-200 focus:ring-2 focus:outline-none text-white bg-gradient-to-r from-accent-600 to-accent-500 hover:from-accent-700 hover:to-accent-600 focus:ring-accent-500 h-9 px-4 py-2 text-sm font-medium rounded-md w-full">
+              Get API Keys — Free
+            </a>
+          </div>
+          <div class="mt-8">
+            <p
+              class="text-sm leading-normal font-medium uppercase text-base-500 dark:text-base-400">
+              Free forever includes:
+            </p>
+            <ul class="flex flex-col mt-4 gap-y-3 text-base-500 dark:text-base-400" role="list">
+              <li class="flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base leading-normal">5 Content Lockers</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base leading-normal">3 Video Lockers</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base leading-normal">10,000 impressions/mo</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base leading-normal">
+                  Basic Analytics
+                </span>
+              </li>
+              <li class="flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base leading-normal">
+                  Email Support
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Tier two -->
+      <div
+        class="flex flex-col h-full p-1 lg:py-1 rounded-3xl bg-accent-700 dark:bg-accent-900 ring-4 ring-base-50 dark:ring-base-900 border border-base-200 dark:border-base-700">
+        <div>
+          <div
+            class="flex flex-col gap-4 p-8 bg-white/10 rounded-[1.3rem] h-full">
+            <div class="flex items-start justify-between w-full">
+              <div>
+                <h3
+                  class="text-lg leading-normal sm:text-xl md:text-2xl font-medium text-white">
+                  Pro
+                </h3>
+                <p class="text-base leading-normal font-medium text-base-100">
+                  For serious marketers
+                </p>
+              </div>
+              <span
+                class="inline-flex items-center font-medium relative text-base-700 bg-base-50 px-2.5 py-1 text-xs rounded-md">
+                Popular
+              </span>
+            </div>
+            <p             class="text-base leading-normal font-medium text-base-100 dark:text-base-300">
+              Everything you need to scale your CPA business.
+            </p>
+          </div>
+        </div>
+        <div class="p-8">
+          <p
+            class="font-semibold flex lg:text-3xl items-baseline text-2xl tracking-tighter text-white">
+            <span
+              data-monthly="$79.00"
+              data-annual="$59.00"
+              x-text="$el.dataset[duration]">
+            </span>
+            <span
+              class="text-sm font-normal font-sans tracking-normal text-white/50">
+              <span x-show="duration === 'monthly'">/month</span>
+              <span x-show="duration === 'annual'" style="display: none">
+                /annually
+              </span>
+            </span>
+          </p>
+          <div class="w-full mt-4">
+            <a
+              href="/signup"
+              class="flex items-center justify-center transition-all duration-200 focus:ring-2 focus:outline-none text-white bg-gradient-to-r from-accent-600 to-accent-500 hover:from-accent-700 hover:to-accent-600 focus:ring-accent-500 h-9 px-4 py-2 text-sm font-medium rounded-md w-full">
+              Get Started
+            </a>
+          </div>
+          <div class="mt-8">
+            <p
+              class="text-sm leading-normal font-medium uppercase text-base-100 dark:text-base-300">
+              Pro plan includes:
+            </p>
+            <ul class="flex flex-col mt-4 gap-y-3 text-base-100" role="list">
+              <li class="flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base leading-normal">Unlimited Lockers</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base leading-normal">
+                  Offer Wall Builder
+                </span>
+              </li>
+              <li class="flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base leading-normal">100K impressions/mo</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base leading-normal">
+                  Advanced Analytics
+                </span>
+              </li>
+              <li class="flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base leading-normal">
+                  Geo-Targeting
+                </span>
+              </li>
+              <li class="flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base leading-normal">Priority Support</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Tier three -->
+        <div
+          class="flex flex-col h-full p-1 lg:py-1 rounded-3xl bg-accent-700 dark:bg-accent-900 ring-4 ring-base-50 dark:ring-base-900 border border-base-200 dark:border-base-700">
+        <div>
+          <div
+            class="flex flex-col gap-4 p-8 bg-white/10 rounded-[1.3rem] h-full">
+            <div class="flex items-start justify-between w-full">
+              <div>
+                <h3
+                  class="text-lg leading-normal sm:text-xl md:text-2xl font-medium text-white">
+                  Agency
+                </h3>
+                <p class="text-base leading-normal font-medium text-base-100">
+                  For large scale operations
+                </p>
+              </div>
+            </div>
+            <p             class="text-base leading-normal font-medium text-base-100 dark:text-base-300">
+              Maximum power for agencies and high-volume traffic.
+            </p>
+          </div>
+        </div>
+        <div class="p-8">
+          <p
+            class="font-semibold flex lg:text-3xl items-baseline text-2xl tracking-tighter text-white">
+            <span
+              data-monthly="$199.00"
+              data-annual="$149.00"
+              x-text="$el.dataset[duration]">
+            </span>
+            <span
+              class="text-sm font-normal font-sans tracking-normal text-accent-100">
+              <span x-show="duration === 'monthly'">/month</span>
+              <span x-show="duration === 'annual'" style="display: none">
+                /annually
+              </span>
+            </span>
+          </p>
+          <div class="w-full mt-4">
+            <a
+              href="/signup"
+              class="flex items-center justify-center transition-all duration-200 focus:ring-2 focus:outline-none text-white bg-gradient-to-r from-accent-600 to-accent-500 hover:from-accent-700 hover:to-accent-600 focus:ring-accent-500 h-9 px-4 py-2 text-sm font-medium rounded-md w-full">
+              Get Started
+            </a>
+          </div>
+          <div class="mt-8">
+            <p
+              class="text-sm leading-normal font-medium uppercase text-base-100 dark:text-base-300">
+              Agency plan includes:
+            </p>
+            <ul class="flex flex-col mt-4 gap-y-3 text-base-100" role="list">
+              <li class="flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base leading-normal">Unlimited Everything</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base leading-normal">AI Code Generator</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base leading-normal">Custom Domains</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base leading-normal">
+                  API Access
+                </span>
+              </li>
+              <li class="flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base leading-normal">White Label</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check size-4">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M5 12l5 5l10 -10"></path>
+                </svg>
+                <span class="text-base leading-normal">Dedicated Account Manager</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

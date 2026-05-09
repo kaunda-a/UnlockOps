@@ -1,0 +1,81 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/forms";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --color-black: #121212;
+  /* Accent - deep indigo/violet palette */
+  --color-accent-25: #f5f3ff;
+  --color-accent-50: #ede9fe;
+  --color-accent-100: #ddd6fe;
+  --color-accent-200: #c4b5fd;
+  --color-accent-300: #a78bfa;
+  --color-accent-400: #8b5cf6;
+  --color-accent-500: #7c3aed;
+  --color-accent-600: #6d28d9;
+  --color-accent-700: #5b21b6;
+  --color-accent-800: #4c1d95;
+  --color-accent-900: #3b0764;
+  --color-accent-950: #1e0033;
+  /* Base - Light mode (white/gray) */
+  --color-base-25: #fafafa;
+  --color-base-50: #f9fafb;
+  --color-base-100: #f3f4f6;
+  --color-base-200: #e5e7eb;
+  --color-base-300: #d1d5db;
+  --color-base-400: #9ca3af;
+  --color-base-500: #6b7280;
+  --color-base-600: #4b5563;
+  --color-base-700: #374151;
+  --color-base-800: #1f2937;
+  --color-base-900: #111827;
+  --color-base-950: #030712;
+}
+
+:root {
+  font-family: Inter, sans-serif;
+}
+
+/* Dark mode - Black / Dark purple bg */
+.dark {
+  --color-base-25: #000000;
+  --color-base-50: #0a000f;
+  --color-base-100: #12001a;
+  --color-base-200: #1a0024;
+  --color-base-300: #250030;
+  --color-base-400: #3b0066;
+  --color-base-500: #6d28d9;
+  --color-base-600: #8b5cf6;
+  --color-base-700: #a78bfa;
+  --color-base-800: #c4b5fd;
+  --color-base-900: #ddd6fe;
+  --color-base-950: #f5f3ff;
+  --color-black: #f0f0f0;
+  /* Accent stays purple but brighter */
+  --color-accent-25: #1e0033;
+  --color-accent-50: #2d0050;
+  --color-accent-100: #3b0066;
+  --color-accent-200: #4c0080;
+  --color-accent-300: #6d28d9;
+  --color-accent-400: #8b5cf6;
+  --color-accent-500: #a78bfa;
+  --color-accent-600: #c4b5fd;
+  --color-accent-700: #ddd6fe;
+  --color-accent-800: #ede9fe;
+  --color-accent-900: #f5f3ff;
+  --color-accent-950: #faf5ff;
+}
+
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: InterVariable, sans-serif;
+  }
+}
+
+button:not(:disabled),
+[role="button"]:not(:disabled) {
+  cursor: pointer;
+}

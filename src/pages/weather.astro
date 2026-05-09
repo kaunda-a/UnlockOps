@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Weather Lookup - Current Weather by City">
+  <div class="min-h-screen bg-base-50 dark:bg-base-950">
+    <div class="max-w-4xl mx-auto px-8 py-16">
+      <h1 class="text-4xl font-bold text-base-900 dark:text-base-100 mb-2">Weather Lookup</h1>
+      <p class="text-base-500 dark:text-base-400 mb-8">Enter a city name to get current weather conditions</p>
+
+      <div class="flex gap-4 mb-8">
+        <input
+          type="text"
+          id="cityInput"
+          placeholder="Enter city name..."
+          class="flex-1 px-4 py-3 rounded-lg border border-base-200 dark:border-base-700 bg-white dark:bg-base-900 text-base-900 dark:text-base-100 focus:outline-none focus:ring-2 focus:ring-accent-500"
+        />
+        <button
+          id="searchBtn"
+          class="px-6 py-3 bg-gradient-to-r from-accent-600 to-accent-500 text-white font-medium rounded-lg hover:from-accent-700 hover:to-accent-600 transition-all"
+        >
+          Search
+        </button>
+      </div>
+
+      <div id="result" class="hidden">
+        <div class="bg-white dark:bg-base-900 rounded-2xl p-8 border border-base-200 dark:border-base-800">
+          <div class="flex items-center gap-6 mb-6">
+            <div class="text-6xl" id="icon">☀️</div>
+            <div>
+              <h2 class="text-3xl font-bold text-base-900 dark:text-base-100" id="cityName">New York</h2>
+              <p class="text-base-500 dark:text-base-400" id="condition">Clear</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="text-center">
+              <p class="text-base-500 dark:text-base-400 text-sm">Temperature</p>
+              <p class="text-2xl font-bold text-base-900 dark:text-base-100" id="temp">22°C</p>
+            </div>
+            <div class="text-center">
+              <p class="text-base-500 dark:text-base-400 text-sm">Feels Like</p>
+              <p class="text-2xl font-bold text-base-900 dark:text-base-100" id="feels">24°C</p>
+            </div>
+            <div class="text-center">
+              <p class="text-base-500 dark:text-base-400 text-sm">Humidity</p>
+              <p class="text-2xl font-bold text-base-900 dark:text-base-100" id="humidity">65%</p>
+            </div>
+            <div class="text-center">
+              <p class="text-base-500 dark:text-base-400 text-sm">Wind</p>
+              <p class="text-2xl font-bold text-base-900 dark:text-base-100" id="wind">12 km/h</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="error" class="hidden bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 text-red-600 dark:text-red-400">
+        City not found. Please try another name.
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  const cityInput = document.getElementById('cityInput') as HTMLInputElement;
+  const searchBtn = document.getElementById('searchBtn');
+  const result = document.getElementById('result');
+  const error = document.getElementById('error');
+
+  const iconMap: Record<string, string> = {
+    'clear': '☀️', 'sunny': '☀️', 'cloudy': '☁️', 'overcast': '☁️',
+    'rain': '🌧️', 'drizzle': '🌦️', 'thunderstorm': '⛈️', 'snow': '❄️',
+    'fog': '🌫️', 'mist': '🌫️'
+  };
+
+  async function searchWeather() {
+    const city = cityInput.value.trim();
+    if (!city) return;
+
+    result?.classList.add('hidden');
+    error?.classList.add('hidden');
+
+    try {
+      const geoRes = await fetch(
+        `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1`
+      );
+      const geoData = await geoRes.json();
+
+      if (!geoData.results?.length) {
+        error?.classList.remove('hidden');
+        return;
+      }
+
+      const { latitude, longitude, name, country } = geoData.results[0];
+
+      const weatherRes = await fetch(
+        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m`
+      );
+      const weather = await weatherRes.json();
+
+      const codes: Record<number, string> = {
+        0: 'clear', 1: 'clear', 2: 'cloudy', 3: 'cloudy',
+        45: 'fog', 48: 'fog', 51: 'drizzle', 53: 'drizzle', 55: 'drizzle',
+        61: 'rain', 63: 'rain', 65: 'rain', 71: 'snow', 73: 'snow', 75: 'snow',
+        80: 'rain', 81: 'rain', 82: 'rain', 95: 'thunderstorm', 96: 'thunderstorm', 99: 'thunderstorm'
+      };
+
+      const condition = codes[weather.current.weather_code] || 'cloudy';
+      const icon = iconMap[condition] || '☁️';
+
+      document.getElementById('cityName')!.textContent = name + (country ? `, ${country}` : '');
+      document.getElementById('condition')!.textContent = condition.charAt(0).toUpperCase() + condition.slice(1);
+      document.getElementById('icon')!.textContent = icon;
+      document.getElementById('temp')!.textContent = Math.round(weather.current.temperature_2m) + '°C';
+      document.getElementById('feels')!.textContent = Math.round(weather.current.apparent_temperature) + '°C';
+      document.getElementById('humidity')!.textContent = weather.current.relative_humidity_2m + '%';
+      document.getElementById('wind')!.textContent = Math.round(weather.current.wind_speed_10m) + ' km/h';
+
+      result?.classList.remove('hidden');
+    } catch (e) {
+      error?.classList.remove('hidden');
+    }
+  }
+
+  searchBtn?.addEventListener('click', searchWeather);
+  cityInput?.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') searchWeather();
+  });
+</script>

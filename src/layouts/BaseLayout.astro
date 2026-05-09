@@ -1,0 +1,29 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Navigation from "../components/global/Navigation.astro";
+import Footer from "../components/global/Footer.astro";
+import { Font } from "astro:assets";
+---
+
+<html
+  lang="en"
+  class="scroll-smooth selection:bg-accent-500 selection:text-white dark:selection:bg-white dark:selection:text-accent-900 no-touchevents hydrated">
+  <head>
+    <BaseHead />
+    <Font cssVariable="--font-sans" preload />
+    <script is:inline>
+      (function() {
+        const stored = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (stored === "dark" || (!stored && prefersDark)) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+  </head>
+  <body class="bg-base-50 dark:bg-base-950 text-base-900 dark:text-base-100 flex flex-col min-h-svh transition-colors duration-300">
+    <Navigation />
+    <main class="grow"><slot /></main>
+    <Footer />
+  </body>
+</html>

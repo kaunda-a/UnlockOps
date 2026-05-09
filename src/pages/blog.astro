@@ -1,0 +1,252 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const blogPosts = [
+  {
+    id: 1,
+    title: "How to Maximize CPA Earnings with Content Lockers",
+    excerpt: "Learn the best strategies for using content lockers to boost your CPA revenue and conversion rates.",
+    content: "Content lockers are one of the most effective monetization strategies for CPA marketers. In this comprehensive guide, we'll explore the best practices for implementing content lockers that convert visitors into leads and sales.\n\n## Understanding Content Lockers\n\nContent lockers work by gating valuable content behind CPA offers. Users must complete an offer to unlock the content, creating a win-win situation where you earn revenue and users get access to premium content.\n\n## Best Practices\n\n1. **Choose the Right Content**: Lock content that provides genuine value to your audience\n2. **Optimize Offer Selection**: Match offers to your audience demographics\n3. **Test Different Locker Types**: Experiment with various locker formats\n4. **Monitor Analytics**: Track conversion rates and optimize accordingly\n\n## Getting Started\n\nStart by identifying your most valuable content and implementing a content locker. Monitor the results and iterate based on performance data.",
+    date: "2024-01-15",
+    author: "Sarah Johnson",
+    category: "Strategy",
+    image: "/blog/cpa-strategy.svg",
+    readTime: "5 min read"
+  },
+  {
+    id: 2,
+    title: "Video Lockers: The Secret to Higher Conversions",
+    excerpt: "Discover why video lockers are outperforming traditional content gates and how to implement them.",
+    content: "Video lockers have emerged as a powerful tool for CPA marketers, offering higher engagement rates and better conversion performance compared to traditional content gates.\n\n## Why Video Lockers Work\n\nVideo content naturally captures attention and keeps users engaged longer. When combined with CPA offers, this engagement translates to higher completion rates.\n\n## Implementation Tips\n\n1. **Pre-roll Offers**: Show offers before video playback\n2. **Mid-roll Gates**: Insert offers at strategic points\n3. **Post-roll Unlocking**: Require offer completion for full access\n\n## Best Video Content for Locking\n\n- Tutorials and how-to guides\n- Exclusive interviews\n- Behind-the-scenes content\n- Premium entertainment",
+    date: "2024-01-10",
+    author: "Mike Chen",
+    category: "Tips",
+    image: "/blog/video-lockers.svg",
+    readTime: "4 min read"
+  },
+  {
+    id: 3,
+    title: "Building Your First Offer Wall: Complete Guide",
+    excerpt: "Step-by-step tutorial on creating and optimizing offer walls for maximum monetization.",
+    content: "Offer walls provide users with multiple CPA offer options, increasing the likelihood of conversion. This guide walks you through creating your first offer wall.\n\n## What is an Offer Wall?\n\nAn offer wall displays multiple CPA offers in a grid or list format, allowing users to choose which offer they want to complete.\n\n## Step-by-Step Setup\n\n1. **Select Your Offers**: Choose offers that match your audience\n2. **Design Your Wall**: Create an attractive, user-friendly layout\n3. **Implement Tracking**: Set up conversion tracking\n4. **Test and Optimize**: Monitor performance and make improvements\n\n## Optimization Strategies\n\n- Group similar offers together\n- Use clear, compelling descriptions\n- Highlight high-converting offers\n- A/B test different layouts",
+    date: "2024-01-05",
+    author: "Emily Davis",
+    category: "Tutorial",
+    image: "/blog/offer-wall.svg",
+    readTime: "8 min read"
+  },
+  {
+    id: 4,
+    title: "AI-Powered Code Generation for Custom Lockers",
+    excerpt: "How to use our AI code generator to build unique, high-converting lockers without coding.",
+    content: "Our AI-powered code generator makes it easy to create custom lockers without any programming knowledge. Here's how to get started.\n\n## Getting Started with AI Code Generation\n\n1. **Describe Your Locker**: Tell the AI what kind of locker you want\n2. **Customize Design**: Choose colors, layouts, and features\n3. **Generate Code**: Get instant, production-ready code\n4. **Deploy**: Copy and paste the code into your site\n\n## Popular Locker Types\n\n- Content download lockers\n- Video gate lockers\n- Email capture lockers\n- Survey completion lockers\n\n## Tips for Best Results\n\n- Be specific in your descriptions\n- Reference successful examples\n- Test different variations\n- Monitor performance metrics",
+    date: "2024-01-02",
+    author: "Alex Turner",
+    category: "Features",
+    image: "/blog/ai-code-gen.svg",
+    readTime: "6 min read"
+  },
+  {
+    id: 5,
+    title: "Geo-Targeting Strategies for CPA Offers",
+    excerpt: "Optimize your offer selection based on user location to increase conversion rates by up to 40%.",
+    content: "Geo-targeting allows you to serve different CPA offers based on user location, dramatically improving conversion rates.\n\n## Why Geo-Targeting Matters\n\nDifferent regions have different offer preferences, payment methods, and regulatory requirements. Tailoring your offers to each location maximizes conversions.\n\n## Implementation Strategies\n\n1. **Detect User Location**: Use IP-based geolocation\n2. **Create Regional Offer Sets**: Build offer pools for each region\n3. **Test and Optimize**: Monitor performance by region\n4. **Compliance Check**: Ensure offers comply with local regulations\n\n## Regional Considerations\n\n- **North America**: Focus on surveys and trials\n- **Europe**: Emphasize app installs and sign-ups\n- **Asia**: Prioritize mobile offers and games\n- **Latin America**: Use entertainment and content offers",
+    date: "2023-12-28",
+    author: "Sarah Johnson",
+    category: "Strategy",
+    image: "/blog/geo-targeting.svg",
+    readTime: "7 min read"
+  },
+  {
+    id: 6,
+    title: "A/B Testing Your Lockers: Data-Driven Optimization",
+    excerpt: "Learn how to run effective A/B tests on your lockers to find the highest-converting variations.",
+    content: "A/B testing is essential for optimizing your locker performance. This guide shows you how to set up and interpret A/B tests effectively.\n\n## What to Test\n\n- Locker design and layout\n- Offer presentation\n- Call-to-action text\n- Color schemes\n- Button placement\n\n## Setting Up Your Test\n\n1. **Define Your Hypothesis**: What you want to test\n2. **Create Variations**: Build different versions\n3. **Split Traffic**: Divide visitors evenly\n4. **Collect Data**: Monitor performance metrics\n5. **Analyze Results**: Determine the winner\n\n## Key Metrics to Track\n\n- Conversion rate\n- Click-through rate\n- Time to conversion\n- Revenue per visitor\n- Bounce rate\n\n## Best Practices\n\n- Test one variable at a time\n- Ensure statistical significance\n- Run tests for sufficient duration\n- Document your findings",
+    date: "2023-12-20",
+    author: "Mike Chen",
+    category: "Analytics",
+    image: "/blog/ab-testing.svg",
+    readTime: "5 min read"
+  }
+];
+
+const categories = [...new Set(blogPosts.map(post => post.category))];
+---
+
+<BaseLayout>
+  <section class="py-20">
+    <div class="px-8 mx-auto md:px-12 lg:px-24 max-w-7xl">
+      <div class="text-center max-w-2xl mx-auto lg:text-balance mb-12">
+        <p class="text-sm leading-normal font-bold uppercase text-accent-600">
+          Blog
+        </p>
+        <h2
+          class="text-xl leading-tight tracking-tight sm:text-2xl md:text-3xl capitalize lg:text-4xl mt-4 font-medium text-base-900 dark:text-base-100 lg:text-balance">
+          Latest Tips & Strategies
+        </h2>
+        <p class="text-base leading-normal mt-4 text-base-500 dark:text-base-400 font-medium">
+          Expert insights on CPA marketing, content locking, and monetization strategies.
+        </p>
+      </div>
+
+      <div class="mb-8 max-w-2xl mx-auto">
+        <div class="relative">
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Search articles..."
+            class="w-full px-4 py-3 pl-12 rounded-lg border border-base-200 dark:border-base-700 bg-white dark:bg-base-800 text-base-900 dark:text-base-100 placeholder-base-400 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent"
+          />
+          <svg
+            class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-base-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-2 justify-center mb-12">
+        <button class="px-4 py-2 rounded-full text-sm font-medium bg-accent-600 text-white">
+          All Posts
+        </button>
+        {
+          categories.map((category) => (
+            <button class="px-4 py-2 rounded-full text-sm font-medium bg-base-100 dark:bg-base-800 text-base-600 dark:text-base-400 hover:bg-accent-100 dark:hover:bg-accent-900 transition-colors">
+              {category}
+            </button>
+          ))
+        }
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {
+          blogPosts.map((post) => (
+            <article class="group bg-base-50 dark:bg-base-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 border border-base-200 dark:border-base-700">
+              <div class="aspect-video bg-gradient-to-br from-accent-100 to-accent-200 dark:from-accent-900 dark:to-accent-800 relative overflow-hidden">
+                <img src={post.image} alt={post.title} class="w-full h-full object-cover" />
+                <div class="absolute top-4 left-4">
+                  <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-accent-600 text-white">
+                    {post.category}
+                  </span>
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-2 text-sm text-base-500 dark:text-base-400 mb-3">
+                  <time>{post.date}</time>
+                  <span>•</span>
+                  <span>{post.readTime}</span>
+                </div>
+                <h3 class="text-lg font-semibold text-base-900 dark:text-base-100 mb-2 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors">
+                  <a href={`/blog/${post.id}`}>
+                    {post.title}
+                  </a>
+                </h3>
+                <p class="text-base text-base-600 dark:text-base-400 mb-4 line-clamp-2">
+                  {post.excerpt}
+                </p>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-accent-100 dark:bg-accent-900 flex items-center justify-center">
+                      <span class="text-sm font-medium text-accent-700 dark:text-accent-300">
+                        {post.author.split(' ').map(n => n[0]).join('')}
+                      </span>
+                    </div>
+                    <span class="text-sm text-base-600 dark:text-base-400">{post.author}</span>
+                  </div>
+                  <a href={`/blog/${post.id}`} class="text-sm font-medium text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300 transition-colors">
+                    Read more →
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <!-- Newsletter Signup Section -->
+      <div class="mt-16 bg-gradient-to-br from-accent-50 to-accent-100 dark:from-accent-900/30 dark:to-accent-800/30 rounded-2xl p-8 border border-accent-200 dark:border-accent-700">
+        <div class="max-w-2xl mx-auto text-center">
+          <h3 class="text-2xl font-bold text-base-900 dark:text-base-100 mb-4">
+            Stay Updated with Latest Marketing Tips
+          </h3>
+          <p class="text-base text-base-600 dark:text-base-400 mb-6">
+            Get exclusive CPA marketing strategies, tips, and insights delivered straight to your inbox.
+          </p>
+          <form class="flex flex-col sm:flex-row gap-3">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              class="flex-1 px-4 py-3 rounded-lg border border-base-200 dark:border-base-700 bg-white dark:bg-base-800 text-base-900 dark:text-base-100 placeholder-base-400 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent"
+            />
+            <button
+              type="submit"
+              class="px-6 py-3 bg-accent-600 text-white font-medium rounded-lg hover:bg-accent-700 transition-colors focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2"
+            >
+              Subscribe
+            </button>
+          </form>
+          <p class="text-sm text-base-500 dark:text-base-400 mt-4">
+            No spam, unsubscribe anytime. Join 10,000+ marketers.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const searchInput = document.getElementById('search-input');
+    const blogPosts = document.querySelectorAll('article');
+    const categoryButtons = document.querySelectorAll('button');
+
+    // Search functionality
+    searchInput?.addEventListener('input', (e) => {
+      const searchTerm = e.target.value.toLowerCase();
+      
+      blogPosts.forEach(post => {
+        const title = post.querySelector('h3')?.textContent.toLowerCase() || '';
+        const excerpt = post.querySelector('p')?.textContent.toLowerCase() || '';
+        const category = post.querySelector('span')?.textContent.toLowerCase() || '';
+        
+        const matchesSearch = title.includes(searchTerm) || 
+                            excerpt.includes(searchTerm) || 
+                            category.includes(searchTerm);
+        
+        post.style.display = matchesSearch ? 'block' : 'none';
+      });
+    });
+
+    // Category filtering
+    categoryButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const selectedCategory = button.textContent.trim();
+        
+        // Update active state
+        categoryButtons.forEach(btn => {
+          btn.classList.remove('bg-accent-600', 'text-white');
+          btn.classList.add('bg-base-100', 'dark:bg-base-800', 'text-base-600', 'dark:text-base-400');
+        });
+        button.classList.remove('bg-base-100', 'dark:bg-base-800', 'text-base-600', 'dark:text-base-400');
+        button.classList.add('bg-accent-600', 'text-white');
+        
+        // Filter posts
+        blogPosts.forEach(post => {
+          const postCategory = post.querySelector('span')?.textContent.trim() || '';
+          
+          if (selectedCategory === 'All Posts') {
+            post.style.display = 'block';
+          } else {
+            post.style.display = postCategory === selectedCategory ? 'block' : 'none';
+          }
+        });
+      });
+    });
+  </script>
+</BaseLayout>

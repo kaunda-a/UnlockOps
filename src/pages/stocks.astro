@@ -1,0 +1,139 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Stock Market Prices - Live US Stock Quotes">
+  <div class="min-h-screen bg-base-50 dark:bg-base-950">
+    <div class="max-w-4xl mx-auto px-8 py-16">
+      <h1 class="text-4xl font-bold text-base-900 dark:text-base-100 mb-2">Stock Market</h1>
+      <p class="text-base-500 dark:text-base-400 mb-8">Major US stock indices and popular stocks</p>
+
+      <div class="flex gap-4 mb-8">
+        <input
+          type="text"
+          id="symbolInput"
+          placeholder="Enter stock symbol (e.g., AAPL, TSLA)..."
+          class="flex-1 px-4 py-3 rounded-lg border border-base-200 dark:border-base-700 bg-white dark:bg-base-900 text-base-900 dark:text-base-100 focus:outline-none focus:ring-2 focus:ring-accent-500 uppercase"
+        />
+        <button
+          id="searchBtn"
+          class="px-6 py-3 bg-gradient-to-r from-accent-600 to-accent-500 text-white font-medium rounded-lg hover:from-accent-700 hover:to-accent-600 transition-all"
+        >
+          Search
+        </button>
+      </div>
+
+      <div id="indices" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div class="bg-white dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-800">
+          <p class="text-base-500 dark:text-base-400 text-sm">S&P 500</p>
+          <p class="text-2xl font-bold text-base-900 dark:text-base-100" id="sp500">---</p>
+          <p class="text-sm" id="sp500Change">---</p>
+        </div>
+        <div class="bg-white dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-800">
+          <p class="text-base-500 dark:text-base-400 text-sm">NASDAQ</p>
+          <p class="text-2xl font-bold text-base-900 dark:text-base-100" id="nasdaq">---</p>
+          <p class="text-sm" id="nasdaqChange">---</p>
+        </div>
+        <div class="bg-white dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-800">
+          <p class="text-base-500 dark:text-base-400 text-sm">DOW</p>
+          <p class="text-2xl font-bold text-base-900 dark:text-base-100" id="dow">---</p>
+          <p class="text-sm" id="dowChange">---</p>
+        </div>
+      </div>
+
+      <div id="searchResult" class="hidden">
+        <div class="bg-white dark:bg-base-900 rounded-2xl p-8 border border-base-200 dark:border-base-800">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-2xl font-bold text-base-900 dark:text-base-100" id="stockName">AAPL</h2>
+              <p class="text-base-500 dark:text-base-400" id="stockPrice">$150.00</p>
+            </div>
+            <div class="text-right">
+              <p class="text-3xl font-bold" id="stockChange">+$2.50</p>
+              <p class="text-base-500 dark:text-base-400" id="stockChangePercent">+1.5%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  async function fetchStock(symbol: string) {
+    try {
+      const res = await fetch(
+        `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?interval=1d&range=1d`
+      );
+      const data = await res.json();
+
+      if (!data.chart?.result) {
+        alert('Stock not found');
+        return;
+      }
+
+      const result = data.chart.result[0];
+      const meta = result.meta;
+      const quote = result.indicators?.quote?.[0];
+
+      const currentPrice = meta.regularMarketPrice;
+      const prevClose = meta.previousClose;
+      const change = currentPrice - prevClose;
+      const changePercent = (change / prevClose) * 100;
+
+      document.getElementById('stockName')!.textContent = meta.symbol;
+      document.getElementById('stockPrice')!.textContent = '$' + currentPrice.toFixed(2);
+      document.getElementById('stockChange')!.textContent = (change >= 0 ? '+' : '') + change.toFixed(2);
+      document.getElementById('stockChange')!.className = `text-3xl font-bold ${change >= 0 ? 'text-green-500' : 'text-red-500'}`;
+      document.getElementById('stockChangePercent')!.textContent = (changePercent >= 0 ? '+' : '') + changePercent.toFixed(2) + '%';
+
+      document.getElementById('searchResult')?.classList.remove('hidden');
+    } catch (e) {
+      alert('Failed to fetch stock data');
+    }
+  }
+
+  async function loadIndices() {
+    const symbols = ['^GSPC', '^IXIC', '^DJI'];
+    const ids = ['sp500', 'nasdaq', 'dow'];
+
+    for (let i = 0; i < symbols.length; i++) {
+      try {
+        const res = await fetch(
+          `https://query1.finance.yahoo.com/v8/finance/chart/${symbols[i]}?interval=1d&range=1d`
+        );
+        const data = await res.json();
+        const result = data.chart?.result?.[0];
+        if (result) {
+          const price = result.meta.regularMarketPrice;
+          const prevClose = result.meta.previousClose;
+          const change = ((price - prevClose) / prevClose * 100).toFixed(2);
+          const isUp = parseFloat(change) >= 0;
+
+          document.getElementById(ids[i])!.textContent = price.toLocaleString();
+          const changeEl = document.getElementById(ids[i] + 'Change');
+          if (changeEl) {
+            changeEl.textContent = (isUp ? '↑' : '↓') + ' ' + Math.abs(parseFloat(change)).toFixed(2) + '%';
+            changeEl.className = `text-sm ${isUp ? 'text-green-500' : 'text-red-500'}`;
+          }
+        }
+      } catch (e) {
+        document.getElementById(ids[i])!.textContent = 'N/A';
+      }
+    }
+  }
+
+  document.getElementById('searchBtn')?.addEventListener('click', () => {
+    const symbol = (document.getElementById('symbolInput') as HTMLInputElement).value.trim().toUpperCase();
+    if (symbol) fetchStock(symbol);
+  });
+
+  (document.getElementById('symbolInput') as HTMLInputElement)?.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      const symbol = (e.target as HTMLInputElement).value.trim().toUpperCase();
+      if (symbol) fetchStock(symbol);
+    }
+  });
+
+  loadIndices();
+</script>

@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Email Validator - Verify Email Address">
+  <div class="min-h-screen bg-base-50 dark:bg-base-950">
+    <div class="max-w-2xl mx-auto px-8 py-16">
+      <h1 class="text-4xl font-bold text-base-900 dark:text-base-100 mb-2">Email Validator</h1>
+      <p class="text-base-500 dark:text-base-400 mb-8">Check if an email address is valid</p>
+
+      <div class="flex gap-4 mb-8">
+        <input
+          type="email"
+          id="emailInput"
+          placeholder="Enter email address..."
+          class="flex-1 px-4 py-3 rounded-lg border border-base-200 dark:border-base-700 bg-white dark:bg-base-900 text-base-900 dark:text-base-100 focus:outline-none focus:ring-2 focus:ring-accent-500"
+        />
+        <button
+          id="validateBtn"
+          class="px-6 py-3 bg-gradient-to-r from-accent-600 to-accent-500 text-white font-medium rounded-lg hover:from-accent-700 hover:to-accent-600 transition-all"
+        >
+          Validate
+        </button>
+      </div>
+
+      <div id="result" class="hidden">
+        <div class="bg-white dark:bg-base-900 rounded-2xl p-8 border border-base-200 dark:border-base-800 text-center">
+          <div id="resultIcon" class="text-6xl mb-4">✓</div>
+          <h2 id="resultTitle" class="text-2xl font-bold text-base-900 dark:text-base-100 mb-2">Valid Email</h2>
+          <p id="resultDesc" class="text-base-500 dark:text-base-400">The email address appears to be valid</p>
+        </div>
+      </div>
+
+      <div id="details" class="hidden mt-6 bg-white dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-800">
+        <h3 class="font-bold text-base-900 dark:text-base-100 mb-4">Validation Details</h3>
+        <div class="space-y-3 text-sm">
+          <div class="flex justify-between">
+            <span class="text-base-500 dark:text-base-400">Format</span>
+            <span id="formatCheck" class="text-base-900 dark:text-base-100">✓ Valid</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-base-500 dark:text-base-400">Domain</span>
+            <span id="domainCheck" class="text-base-900 dark:text-base-100">✓ Found</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-base-500 dark:text-base-400">TLD</span>
+            <span id="tldCheck" class="text-base-900 dark:text-base-100">✓ Valid</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-base-500 dark:text-base-400">MX Records</span>
+            <span id="mxCheck" class="text-base-900 dark:text-base-100">? Unknown</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const commonDomains = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'icloud.com', 'protonmail.com'];
+
+  function validateEmail(email: string) {
+    const result = document.getElementById('result')!;
+    const resultIcon = document.getElementById('resultIcon')!;
+    const resultTitle = document.getElementById('resultTitle')!;
+    const resultDesc = document.getElementById('resultDesc')!;
+    const details = document.getElementById('details')!;
+
+    result.classList.remove('hidden');
+    details.classList.remove('hidden');
+
+    const formatValid = emailRegex.test(email);
+
+    if (!formatValid) {
+      resultIcon.textContent = '✗';
+      resultTitle.textContent = 'Invalid Email';
+      resultDesc.textContent = 'The email format is not valid';
+      resultIcon.className = 'text-6xl mb-4 text-red-500';
+      document.getElementById('formatCheck')!.textContent = '✗ Invalid';
+      document.getElementById('formatCheck')!.className = 'text-red-500';
+      return;
+    }
+
+    const parts = email.split('@');
+    const domain = parts[1].toLowerCase();
+    const tld = domain.split('.').pop() || '';
+
+    const tldValid = tld.length >= 2 && /^[a-z]+$/.test(tld);
+    const commonDomain = commonDomains.includes(domain);
+
+    document.getElementById('formatCheck')!.textContent = '✓ Valid';
+    document.getElementById('formatCheck')!.className = 'text-green-500';
+    document.getElementById('domainCheck')!.textContent = domain;
+    document.getElementById('tldCheck')!.textContent = tldValid ? '✓ Valid' : '? Check manually';
+    document.getElementById('mxCheck')!.textContent = commonDomain ? '✓ Likely valid' : '? Unknown';
+
+    resultIcon.textContent = '✓';
+    resultTitle.textContent = 'Valid Email';
+    resultDesc.textContent = commonDomain
+      ? 'Common email provider - likely valid'
+      : 'Email format appears valid';
+    resultIcon.className = 'text-6xl mb-4 text-green-500';
+  }
+
+  document.getElementById('validateBtn')?.addEventListener('click', () => {
+    const email = (document.getElementById('emailInput') as HTMLInputElement).value.trim();
+    if (email) validateEmail(email);
+  });
+
+  (document.getElementById('emailInput') as HTMLInputElement)?.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      const email = (e.target as HTMLInputElement).value.trim();
+      if (email) validateEmail(email);
+    }
+  });
+</script>

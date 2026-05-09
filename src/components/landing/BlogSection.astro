@@ -1,0 +1,136 @@
+---
+const blogPosts = [
+  {
+    id: 1,
+    title: "How to Maximize CPA Earnings with Content Lockers",
+    excerpt: "Learn the best strategies for using content lockers to boost your CPA revenue and conversion rates.",
+    date: "2024-01-15",
+    author: "Sarah Johnson",
+    category: "Strategy",
+    image: "/blog/cpa-strategy.jpg",
+    readTime: "5 min read"
+  },
+  {
+    id: 2,
+    title: "Video Lockers: The Secret to Higher Conversions",
+    excerpt: "Discover why video lockers are outperforming traditional content gates and how to implement them.",
+    date: "2024-01-10",
+    author: "Mike Chen",
+    category: "Tips",
+    image: "/blog/video-lockers.jpg",
+    readTime: "4 min read"
+  },
+  {
+    id: 3,
+    title: "Building Your First Offer Wall: Complete Guide",
+    excerpt: "Step-by-step tutorial on creating and optimizing offer walls for maximum monetization.",
+    date: "2024-01-05",
+    author: "Emily Davis",
+    category: "Tutorial",
+    image: "/blog/offer-wall.jpg",
+    readTime: "8 min read"
+  },
+  {
+    id: 4,
+    title: "AI-Powered Code Generation for Custom Lockers",
+    excerpt: "How to use our AI code generator to build unique, high-converting lockers without coding.",
+    date: "2024-01-02",
+    author: "Alex Turner",
+    category: "Features",
+    image: "/blog/ai-code-gen.jpg",
+    readTime: "6 min read"
+  },
+  {
+    id: 5,
+    title: "Geo-Targeting Strategies for CPA Offers",
+    excerpt: "Optimize your offer selection based on user location to increase conversion rates by up to 40%.",
+    date: "2023-12-28",
+    author: "Sarah Johnson",
+    category: "Strategy",
+    image: "/blog/geo-targeting.jpg",
+    readTime: "7 min read"
+  },
+  {
+    id: 6,
+    title: "A/B Testing Your Lockers: Data-Driven Optimization",
+    excerpt: "Learn how to run effective A/B tests on your lockers to find the highest-converting variations.",
+    date: "2023-12-20",
+    author: "Mike Chen",
+    category: "Analytics",
+    image: "/blog/ab-testing.jpg",
+    readTime: "5 min read"
+  }
+];
+---
+
+<section class="py-20">
+  <div class="px-8 mx-auto md:px-12 lg:px-24 max-w-7xl">
+    <div class="text-center max-w-2xl mx-auto lg:text-balance mb-16">
+      <p class="text-sm leading-normal font-bold uppercase text-accent-600">
+        Blog
+      </p>
+      <h2
+        class="text-xl leading-tight tracking-tight sm:text-2xl md:text-3xl capitalize lg:text-4xl mt-4 font-medium text-base-900 dark:text-base-100 lg:text-balance">
+        Latest Tips & Strategies
+      </h2>
+      <p class="text-base leading-normal mt-4 text-base-500 dark:text-base-400 font-medium">
+        Expert insights on CPA marketing, content locking, and monetization strategies.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {
+        blogPosts.map((post) => (
+          <article class="group bg-base-50 dark:bg-base-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 border border-base-200 dark:border-base-700">
+            <div class="aspect-video bg-gradient-to-br from-accent-100 to-accent-200 dark:from-accent-900 dark:to-accent-800 relative overflow-hidden">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <svg class="w-16 h-16 text-accent-400 dark:text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+                </svg>
+              </div>
+              <div class="absolute top-4 left-4">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-accent-600 text-white">
+                  {post.category}
+                </span>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 text-sm text-base-500 dark:text-base-400 mb-3">
+                <time>{post.date}</time>
+                <span>•</span>
+                <span>{post.readTime}</span>
+              </div>
+              <h3 class="text-lg font-semibold text-base-900 dark:text-base-100 mb-2 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors">
+                <a href={`/blog/${post.id}`}>
+                  {post.title}
+                </a>
+              </h3>
+              <p class="text-base text-base-600 dark:text-base-400 mb-4 line-clamp-2">
+                {post.excerpt}
+              </p>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-full bg-accent-100 dark:bg-accent-900 flex items-center justify-center">
+                    <span class="text-sm font-medium text-accent-700 dark:text-accent-300">
+                      {post.author.split(' ').map(n => n[0]).join('')}
+                    </span>
+                  </div>
+                  <span class="text-sm text-base-600 dark:text-base-400">{post.author}</span>
+                </div>
+                <a href={`/blog/${post.id}`} class="text-sm font-medium text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300 transition-colors">
+                  Read more →
+                </a>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="text-center mt-12">
+      <a href="/blog" class="inline-flex items-center justify-center transition-all duration-200 focus:ring-2 focus:outline-none text-white bg-accent-600 hover:bg-accent-700 focus:ring-accent-500/50 h-10 px-6 py-3 text-sm font-medium rounded-lg">
+        View All Posts
+      </a>
+    </div>
+  </div>
+</section>
