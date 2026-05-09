@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="IP Address Lookup - Find Your IP & Location">
+  <div class="min-h-screen bg-base-50 dark:bg-base-950">
+    <div class="max-w-2xl mx-auto px-8 py-16">
+      <h1 class="text-4xl font-bold text-base-900 dark:text-base-100 mb-2">IP Address Lookup</h1>
+      <p class="text-base-500 dark:text-base-400 mb-8">Your IP address and location details</p>
+
+      <div id="loading" class="text-center py-12">
+        <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-accent-500"></div>
+        <p class="mt-4 text-base-500 dark:text-base-400">Looking up your IP...</p>
+      </div>
+
+      <div id="result" class="hidden">
+        <div class="bg-white dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-800 mb-6">
+          <div class="text-center mb-6">
+            <p class="text-base-500 dark:text-base-400 text-sm">Your IP Address</p>
+            <p class="text-3xl font-bold text-base-900 dark:text-base-100" id="ip">---</p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-base-50 dark:bg-base-800 rounded-lg p-4">
+              <p class="text-base-500 dark:text-base-400 text-sm">City</p>
+              <p class="text-base-900 dark:text-base-100 font-medium" id="city">---</p>
+            </div>
+            <div class="bg-base-50 dark:bg-base-800 rounded-lg p-4">
+              <p class="text-base-500 dark:text-base-400 text-sm">Region</p>
+              <p class="text-base-900 dark:text-base-100 font-medium" id="region">---</p>
+            </div>
+            <div class="bg-base-50 dark:bg-base-800 rounded-lg p-4">
+              <p class="text-base-500 dark:text-base-400 text-sm">Country</p>
+              <p class="text-base-900 dark:text-base-100 font-medium" id="country">---</p>
+            </div>
+            <div class="bg-base-50 dark:bg-base-800 rounded-lg p-4">
+              <p class="text-base-500 dark:text-base-400 text-sm">ISP</p>
+              <p class="text-base-900 dark:text-base-100 font-medium" id="isp">---</p>
+            </div>
+            <div class="bg-base-50 dark:bg-base-800 rounded-lg p-4">
+              <p class="text-base-500 dark:text-base-400 text-sm">Timezone</p>
+              <p class="text-base-900 dark:text-base-100 font-medium" id="timezone">---</p>
+            </div>
+            <div class="bg-base-50 dark:bg-base-800 rounded-lg p-4">
+              <p class="text-base-500 dark:text-base-400 text-sm">Coordinates</p>
+              <p class="text-base-900 dark:text-base-100 font-medium" id="coords">---</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-800">
+          <h2 class="font-semibold text-base-900 dark:text-base-100 mb-4">Look up another IP</h2>
+          <div class="flex gap-4">
+            <input type="text" id="lookupIp" placeholder="Enter IP address..." class="flex-1 px-4 py-2 rounded-lg border border-base-200 dark:border-base-700 bg-white dark:bg-base-800 text-base-900 dark:text-base-100">
+            <button id="lookupBtn" class="px-6 py-2 bg-accent-600 text-white rounded-lg hover:bg-accent-700">Lookup</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  async function fetchIp(ip?: string) {
+    const url = ip ? `http://ip-api.com/json/${ip}?fields=status,message,country,countryCode,region,regionName,city,zip,lat,lon,timezone,isp,org,query` : 'http://ip-api.com/json/?fields=status,message,country,countryCode,region,regionName,city,zip,lat,lon,timezone,isp,org,query';
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      if (data.status === 'fail') {
+        alert('Invalid IP address');
+        return;
+      }
+      document.getElementById('ip')!.textContent = data.query;
+      document.getElementById('city')!.textContent = data.city || 'Unknown';
+      document.getElementById('region')!.textContent = data.regionName || 'Unknown';
+      document.getElementById('country')!.textContent = data.country || 'Unknown';
+      document.getElementById('isp')!.textContent = data.isp || 'Unknown';
+      document.getElementById('timezone')!.textContent = data.timezone || 'Unknown';
+      document.getElementById('coords')!.textContent = data.lat && data.lon ? `${data.lat}, ${data.lon}` : 'Unknown';
+      document.getElementById('loading')?.classList.add('hidden');
+      document.getElementById('result')?.classList.remove('hidden');
+    } catch (e) {
+      document.getElementById('loading')!.innerHTML = '<p class="text-red-500">Failed to fetch IP info</p>';
+    }
+  }
+  fetchIp();
+  document.getElementById('lookupBtn')?.addEventListener('click', () => {
+    const ip = (document.getElementById('lookupIp') as HTMLInputElement).value.trim();
+    if (ip) fetchIp(ip);
+  });
+</script>

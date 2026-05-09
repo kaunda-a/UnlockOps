@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="UUID Generator - Generate Unique Identifiers">
+  <div class="min-h-screen bg-base-50 dark:bg-base-950">
+    <div class="max-w-2xl mx-auto px-8 py-16">
+      <h1 class="text-4xl font-bold text-base-900 dark:text-base-100 mb-2">UUID Generator</h1>
+      <p class="text-base-500 dark:text-base-400 mb-8">Generate UUIDs (Universally Unique Identifiers)</p>
+
+      <div class="bg-white dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-800 mb-6">
+        <div class="flex items-center gap-4 mb-4">
+          <input type="text" id="uuid" readonly class="flex-1 px-4 py-3 font-mono text-lg bg-base-50 dark:bg-base-800 border border-base-200 dark:border-base-700 rounded-lg text-base-900 dark:text-base-100">
+          <button id="copy" class="px-4 py-2 bg-accent-600 text-white rounded-lg hover:bg-accent-700">Copy</button>
+        </div>
+
+        <button id="generate" class="w-full py-3 bg-gradient-to-r from-accent-600 to-accent-500 text-white font-medium rounded-lg hover:from-accent-700 hover:to-accent-600">
+          Generate New UUID
+        </button>
+      </div>
+
+      <div class="bg-white dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-800">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="font-semibold text-base-900 dark:text-base-100">Batch Generate</h2>
+          <span id="batchCount" class="text-sm text-base-500">5</span>
+        </div>
+        <input type="range" id="batchSize" min="1" max="20" value="5" class="w-full mb-4">
+        <button id="generateBatch" class="w-full py-2 bg-base-200 dark:bg-base-800 text-base-700 dark:text-base-300 rounded-lg hover:bg-base-300 dark:hover:bg-base-700">
+          Generate Batch
+        </button>
+        <div id="batchList" class="mt-4 space-y-2 font-mono text-sm"></div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  function generateUuid() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+      const r = Math.random() * 16 | 0;
+      const v = c === 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
+
+  document.getElementById('generate')?.addEventListener('click', () => {
+    (document.getElementById('uuid') as HTMLInputElement).value = generateUuid();
+  });
+
+  document.getElementById('copy')?.addEventListener('click', () => {
+    navigator.clipboard.writeText((document.getElementById('uuid') as HTMLInputElement).value);
+  });
+
+  document.getElementById('batchSize')?.addEventListener('input', (e) => {
+    document.getElementById('batchCount')!.textContent = (e.target as HTMLInputElement).value;
+  });
+
+  document.getElementById('generateBatch')?.addEventListener('click', () => {
+    const count = parseInt((document.getElementById('batchSize') as HTMLInputElement).value);
+    const list = document.getElementById('batchList')!;
+    list.innerHTML = Array(count).fill(0).map(() => {
+      const uuid = generateUuid();
+      return `<div class="flex items-center justify-between px-3 py-2 bg-base-50 dark:bg-base-800 rounded text-base-900 dark:text-base-100">
+        <span>${uuid}</span>
+        <button class="text-accent-600 hover:text-accent-700 text-xs" onclick="navigator.clipboard.writeText('${uuid}')">Copy</button>
+      </div>`;
+    }).join('');
+  });
+
+  (document.getElementById('uuid') as HTMLInputElement).value = generateUuid();
+</script>

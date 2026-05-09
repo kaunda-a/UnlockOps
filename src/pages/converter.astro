@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Unit Converter - Length, Weight, Temperature">
+  <div class="min-h-screen bg-base-50 dark:bg-base-950">
+    <div class="max-w-2xl mx-auto px-8 py-16">
+      <h1 class="text-4xl font-bold text-base-900 dark:text-base-100 mb-2">Unit Converter</h1>
+      <p class="text-base-500 dark:text-base-400 mb-8">Convert between length, weight, and temperature units</p>
+
+      <div class="space-y-8">
+        <div class="bg-white dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-800">
+          <h2 class="text-lg font-semibold text-base-900 dark:text-base-100 mb-4">Temperature</h2>
+          <div class="grid grid-cols-3 gap-4">
+            <div>
+              <label class="text-sm text-base-500 dark:text-base-400">Celsius</label>
+              <input type="number" id="celsius" class="w-full mt-1 px-3 py-2 rounded-lg border border-base-200 dark:border-base-700 bg-white dark:bg-base-800 text-base-900 dark:text-base-100" placeholder="0">
+            </div>
+            <div>
+              <label class="text-sm text-base-500 dark:text-base-400">Fahrenheit</label>
+              <input type="number" id="fahrenheit" class="w-full mt-1 px-3 py-2 rounded-lg border border-base-200 dark:border-base-700 bg-white dark:bg-base-800 text-base-900 dark:text-base-100" placeholder="32">
+            </div>
+            <div>
+              <label class="text-sm text-base-500 dark:text-base-400">Kelvin</label>
+              <input type="number" id="kelvin" class="w-full mt-1 px-3 py-2 rounded-lg border border-base-200 dark:border-base-700 bg-white dark:bg-base-800 text-base-900 dark:text-base-100" placeholder="273">
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-800">
+          <h2 class="text-lg font-semibold text-base-900 dark:text-base-100 mb-4">Length</h2>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="text-sm text-base-500 dark:text-base-400">Meters</label>
+              <input type="number" id="meters" class="w-full mt-1 px-3 py-2 rounded-lg border border-base-200 dark:border-base-700 bg-white dark:bg-base-800 text-base-900 dark:text-base-100" placeholder="1">
+            </div>
+            <div>
+              <label class="text-sm text-base-500 dark:text-base-400">Feet</label>
+              <input type="number" id="feet" class="w-full mt-1 px-3 py-2 rounded-lg border border-base-200 dark:border-base-700 bg-white dark:bg-base-800 text-base-900 dark:text-base-100" placeholder="3.28">
+            </div>
+            <div>
+              <label class="text-sm text-base-500 dark:text-base-400">Kilometers</label>
+              <input type="number" id="km" class="w-full mt-1 px-3 py-2 rounded-lg border border-base-200 dark:border-base-700 bg-white dark:bg-base-800 text-base-900 dark:text-base-100" placeholder="1">
+            </div>
+            <div>
+              <label class="text-sm text-base-500 dark:text-base-400">Miles</label>
+              <input type="number" id="miles" class="w-full mt-1 px-3 py-2 rounded-lg border border-base-200 dark:border-base-700 bg-white dark:bg-base-800 text-base-900 dark:text-base-100" placeholder="0.62">
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-800">
+          <h2 class="text-lg font-semibold text-base-900 dark:text-base-100 mb-4">Weight</h2>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="text-sm text-base-500 dark:text-base-400">Kilograms</label>
+              <input type="number" id="kg" class="w-full mt-1 px-3 py-2 rounded-lg border border-base-200 dark:border-base-700 bg-white dark:bg-base-800 text-base-900 dark:text-base-100" placeholder="1">
+            </div>
+            <div>
+              <label class="text-sm text-base-500 dark:text-base-400">Pounds</label>
+              <input type="number" id="lbs" class="w-full mt-1 px-3 py-2 rounded-lg border border-base-200 dark:border-base-700 bg-white dark:bg-base-800 text-base-900 dark:text-base-100" placeholder="2.2">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  document.getElementById('celsius')?.addEventListener('input', (e) => {
+    const c = parseFloat((e.target as HTMLInputElement).value);
+    if (!isNaN(c)) {
+      (document.getElementById('fahrenheit') as HTMLInputElement).value = (c * 9/5 + 32).toFixed(2);
+      (document.getElementById('kelvin') as HTMLInputElement).value = (c + 273.15).toFixed(2);
+    }
+  });
+  document.getElementById('fahrenheit')?.addEventListener('input', (e) => {
+    const f = parseFloat((e.target as HTMLInputElement).value);
+    if (!isNaN(f)) {
+      (document.getElementById('celsius') as HTMLInputElement).value = ((f - 32) * 5/9).toFixed(2);
+      (document.getElementById('kelvin') as HTMLInputElement).value = ((f - 32) * 5/9 + 273.15).toFixed(2);
+    }
+  });
+  document.getElementById('kelvin')?.addEventListener('input', (e) => {
+    const k = parseFloat((e.target as HTMLInputElement).value);
+    if (!isNaN(k)) {
+      (document.getElementById('celsius') as HTMLInputElement).value = (k - 273.15).toFixed(2);
+      (document.getElementById('fahrenheit') as HTMLInputElement).value = ((k - 273.15) * 9/5 + 32).toFixed(2);
+    }
+  });
+
+  document.getElementById('meters')?.addEventListener('input', (e) => {
+    const m = parseFloat((e.target as HTMLInputElement).value);
+    if (!isNaN(m)) {
+      (document.getElementById('feet') as HTMLInputElement).value = (m * 3.28084).toFixed(2);
+      (document.getElementById('km') as HTMLInputElement).value = (m / 1000).toFixed(4);
+    }
+  });
+  document.getElementById('feet')?.addEventListener('input', (e) => {
+    const f = parseFloat((e.target as HTMLInputElement).value);
+    if (!isNaN(f)) {
+      (document.getElementById('meters') as HTMLInputElement).value = (f / 3.28084).toFixed(4);
+    }
+  });
+  document.getElementById('km')?.addEventListener('input', (e) => {
+    const km = parseFloat((e.target as HTMLInputElement).value);
+    if (!isNaN(km)) {
+      (document.getElementById('meters') as HTMLInputElement).value = (km * 1000).toFixed(4);
+      (document.getElementById('miles') as HTMLInputElement).value = (km * 0.621371).toFixed(2);
+    }
+  });
+  document.getElementById('miles')?.addEventListener('input', (e) => {
+    const mi = parseFloat((e.target as HTMLInputElement).value);
+    if (!isNaN(mi)) {
+      (document.getElementById('km') as HTMLInputElement).value = (mi / 0.621371).toFixed(2);
+    }
+  });
+
+  document.getElementById('kg')?.addEventListener('input', (e) => {
+    const kg = parseFloat((e.target as HTMLInputElement).value);
+    if (!isNaN(kg)) (document.getElementById('lbs') as HTMLInputElement).value = (kg * 2.20462).toFixed(2);
+  });
+  document.getElementById('lbs')?.addEventListener('input', (e) => {
+    const lbs = parseFloat((e.target as HTMLInputElement).value);
+    if (!isNaN(lbs)) (document.getElementById('kg') as HTMLInputElement).value = (lbs / 2.20462).toFixed(2);
+  });
+</script>

@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Base64 Encoder/Decoder - Encode & Decode Base64">
+  <div class="min-h-screen bg-base-50 dark:bg-base-950">
+    <div class="max-w-4xl mx-auto px-8 py-16">
+      <h1 class="text-4xl font-bold text-base-900 dark:text-base-100 mb-2">Base64 Encoder/Decoder</h1>
+      <p class="text-base-500 dark:text-base-400 mb-8">Encode text to Base64 or decode Base64 to text</p>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white dark:bg-base-900 rounded-xl p-4 border border-base-200 dark:border-base-800">
+          <div class="flex items-center justify-between mb-3">
+            <h2 class="font-semibold text-base-900 dark:text-base-100">Plain Text</h2>
+            <button id="clearText" class="text-sm text-base-500 hover:text-base-700 dark:hover:text-base-300">Clear</button>
+          </div>
+          <textarea id="plain" rows="12" class="w-full px-3 py-2 font-mono text-sm bg-base-50 dark:bg-base-800 border border-base-200 dark:border-base-700 rounded-lg text-base-900 dark:text-base-100 resize-none" placeholder="Enter text..."></textarea>
+        </div>
+
+        <div class="bg-white dark:bg-base-900 rounded-xl p-4 border border-base-200 dark:border-base-800">
+          <div class="flex items-center justify-between mb-3">
+            <h2 class="font-semibold text-base-900 dark:text-base-100">Base64</h2>
+            <button id="copyBase" class="text-sm text-base-500 hover:text-base-700 dark:hover:text-base-300">Copy</button>
+          </div>
+          <textarea id="encoded" rows="12" class="w-full px-3 py-2 font-mono text-sm bg-base-50 dark:bg-base-800 border border-base-200 dark:border-base-700 rounded-lg text-base-900 dark:text-base-100 resize-none" placeholder="Enter Base64..."></textarea>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-4 mt-6">
+        <button id="encode" class="px-6 py-2 bg-gradient-to-r from-accent-600 to-accent-500 text-white rounded-lg hover:from-accent-700 hover:to-accent-600">Encode →</button>
+        <button id="decode" class="px-6 py-2 bg-gradient-to-r from-accent-600 to-accent-500 text-white rounded-lg hover:from-accent-700 hover:to-accent-600">← Decode</button>
+      </div>
+
+      <div id="error" class="hidden mt-4 text-sm text-red-500"></div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  const plain = document.getElementById('plain') as HTMLTextAreaElement;
+  const encoded = document.getElementById('encoded') as HTMLTextAreaElement;
+  const error = document.getElementById('error')!;
+
+  function showError(msg: string) {
+    error.textContent = msg;
+    error.classList.remove('hidden');
+  }
+
+  document.getElementById('encode')?.addEventListener('click', () => {
+    error.classList.add('hidden');
+    try {
+      encoded.value = btoa(plain.value);
+    } catch (e) {
+      showError('Error: Input contains characters that cannot be encoded');
+    }
+  });
+
+  document.getElementById('decode')?.addEventListener('click', () => {
+    error.classList.add('hidden');
+    try {
+      plain.value = atob(encoded.value);
+    } catch (e) {
+      showError('Error: Invalid Base64 string');
+    }
+  });
+
+  document.getElementById('clearText')?.addEventListener('click', () => {
+    plain.value = '';
+    encoded.value = '';
+    error.classList.add('hidden');
+  });
+
+  document.getElementById('copyBase')?.addEventListener('click', () => {
+    navigator.clipboard.writeText(encoded.value);
+  });
+</script>

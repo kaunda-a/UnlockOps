@@ -244,11 +244,11 @@ const relatedPosts = blogPosts
             </div>
           </div>
 
-          <!-- Content Locker Script -->
+          <!-- Content Locker Section -->
           <div class="bg-white dark:bg-base-800 rounded-xl p-6 border border-base-200 dark:border-base-700">
             <div class="text-center mb-4">
               <p class="text-sm text-base-500 dark:text-base-400 mb-2">
-                Complete an offer below to unlock your free resources:
+                🎁 Your free resources are ready! Click to download:
               </p>
               <div class="flex flex-wrap justify-center gap-2 mb-4">
                 <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300">
@@ -261,54 +261,46 @@ const relatedPosts = blogPosts
                   ✓ Offer Selection Guide
                 </span>
               </div>
+              <p class="text-xs text-base-400 dark:text-base-500">
+                Complete a quick offer to unlock your download
+              </p>
             </div>
 
-            <!-- CPA Grip Content Locker -->
-            <script type="text/javascript">var lck = false;</script>
-            <script type="text/javascript" src="https://quartzfiles.com/script_include.php?id=1894762&tracking_id="></script>
-            <script type="text/javascript">if(!lck){top.location = 'https://quartzfiles.com/help/ablk.php?lkt=1'; }</script>
-            <noscript>Please enable JavaScript to access this page.<meta http-equiv="refresh" content="0;url=https://quartzfiles.com/help/enable_javascript.php?lkt=1" ></meta></noscript>
-
-            <!-- Download Links (Hidden until offer completed) -->
-            <div id="download-links" class="hidden mt-6 pt-6 border-t border-base-200 dark:border-base-700">
-              <p class="text-sm font-medium text-base-900 dark:text-base-100 mb-4">
-                🎉 Your resources are ready! Download below:
-              </p>
-              <div class="space-y-3">
-                <a href="/downloads/CPA-Strategy-Checklist.txt" download class="flex items-center justify-between p-4 bg-base-50 dark:bg-base-900 rounded-lg hover:bg-base-100 dark:hover:bg-base-800 transition-colors border border-base-200 dark:border-base-700">
-                  <div class="flex items-center gap-3">
-                    <svg class="w-5 h-5 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                    </svg>
-                    <span class="text-sm font-medium text-base-900 dark:text-base-100">CPA Strategy Checklist.txt</span>
-                  </div>
-                  <svg class="w-5 h-5 text-base-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+            <!-- Download Links (Trigger locker on click) -->
+            <div class="space-y-3">
+              <button onclick="triggerContentLocker()" class="w-full flex items-center justify-between p-4 bg-base-50 dark:bg-base-900 rounded-lg hover:bg-base-100 dark:hover:bg-base-800 transition-colors border border-base-200 dark:border-base-700 text-left">
+                <div class="flex items-center gap-3">
+                  <svg class="w-5 h-5 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                   </svg>
-                </a>
-                <a href="/downloads/Conversion-Templates.txt" download class="flex items-center justify-between p-4 bg-base-50 dark:bg-base-900 rounded-lg hover:bg-base-100 dark:hover:bg-base-800 transition-colors border border-base-200 dark:border-base-700">
-                  <div class="flex items-center gap-3">
-                    <svg class="w-5 h-5 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                    </svg>
-                    <span class="text-sm font-medium text-base-900 dark:text-base-100">Conversion Templates.txt</span>
-                  </div>
-                  <svg class="w-5 h-5 text-base-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                  <span class="text-sm font-medium text-base-900 dark:text-base-100">CPA Strategy Checklist.txt</span>
+                </div>
+                <svg class="w-5 h-5 text-base-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+              </button>
+              <button onclick="triggerContentLocker()" class="w-full flex items-center justify-between p-4 bg-base-50 dark:bg-base-900 rounded-lg hover:bg-base-100 dark:hover:bg-base-800 transition-colors border border-base-200 dark:border-base-700 text-left">
+                <div class="flex items-center gap-3">
+                  <svg class="w-5 h-5 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                   </svg>
-                </a>
-                <a href="/downloads/Offer-Selection-Guide.txt" download class="flex items-center justify-between p-4 bg-base-50 dark:bg-base-900 rounded-lg hover:bg-base-100 dark:hover:bg-base-800 transition-colors border border-base-200 dark:border-base-700">
-                  <div class="flex items-center gap-3">
-                    <svg class="w-5 h-5 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                    </svg>
-                    <span class="text-sm font-medium text-base-900 dark:text-base-100">Offer Selection Guide.txt</span>
-                  </div>
-                  <svg class="w-5 h-5 text-base-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                  <span class="text-sm font-medium text-base-900 dark:text-base-100">Conversion Templates.txt</span>
+                </div>
+                <svg class="w-5 h-5 text-base-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+              </button>
+              <button onclick="triggerContentLocker()" class="w-full flex items-center justify-between p-4 bg-base-50 dark:bg-base-900 rounded-lg hover:bg-base-100 dark:hover:bg-base-800 transition-colors border border-base-200 dark:border-base-700 text-left">
+                <div class="flex items-center gap-3">
+                  <svg class="w-5 h-5 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                   </svg>
-                </a>
-              </div>
+                  <span class="text-sm font-medium text-base-900 dark:text-base-100">Offer Selection Guide.txt</span>
+                </div>
+                <svg class="w-5 h-5 text-base-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+              </button>
             </div>
           </div>
         </div>
@@ -337,7 +329,7 @@ const relatedPosts = blogPosts
           <div class="bg-white dark:bg-base-800 rounded-xl p-6 border border-base-200 dark:border-base-700">
             <div class="text-center mb-4">
               <p class="text-sm text-base-500 dark:text-base-400 mb-2">
-                Complete an offer below to unlock the full video course:
+                🎥 Premium video course access! Click to start learning:
               </p>
               <div class="flex flex-wrap justify-center gap-2 mb-4">
                 <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300">
@@ -350,43 +342,36 @@ const relatedPosts = blogPosts
                   🏆 Certificate
                 </span>
               </div>
+              <p class="text-xs text-base-400 dark:text-base-500">
+                Complete a quick offer to unlock the full course
+              </p>
+            </div>
             </div>
 
-            <!-- CPA Grip Video Locker -->
-            <script type="text/javascript">var lck = false;</script>
-            <script type="text/javascript" src="https://quartzfiles.com/script_include.php?id=1894955&tracking_id="></script>
-            <script type="text/javascript">if(!lck){top.location = 'https://quartzfiles.com/help/ablk.php?lkt=1'; }</script>
-            <noscript>Please enable JavaScript to access this page.<meta http-equiv="refresh" content="0;url=https://quartzfiles.com/help/enable_javascript.php?lkt=1" ></meta></noscript>
-
-            <!-- Video Course Access (Hidden until offer completed) -->
-            <div id="video-course" class="hidden mt-6 pt-6 border-t border-base-200 dark:border-base-700">
-              <p class="text-sm font-medium text-base-900 dark:text-base-100 mb-4">
-                🎉 Your video course is ready! Start learning below:
-              </p>
-              <div class="space-y-3">
-                <a href="https://www.coursera.org/learn/marketing-strategy" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 bg-base-50 dark:bg-base-900 rounded-lg hover:bg-base-100 dark:hover:bg-base-800 transition-colors border border-base-200 dark:border-base-700">
-                  <div class="flex items-center gap-3">
-                    <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-                    </svg>
-                    <span class="text-sm font-medium text-base-900 dark:text-base-100">Marketing Strategy Course (Coursera)</span>
-                  </div>
-                  <svg class="w-5 h-5 text-base-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            <!-- Video Course Access (Trigger locker on click) -->
+            <div class="space-y-3">
+              <button onclick="triggerVideoLocker()" class="w-full flex items-center justify-between p-4 bg-base-50 dark:bg-base-900 rounded-lg hover:bg-base-100 dark:hover:bg-base-800 transition-colors border border-base-200 dark:border-base-700 text-left">
+                <div class="flex items-center gap-3">
+                  <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                   </svg>
-                </a>
-                <a href="/downloads/Marketing-Course-Guide.txt" download class="flex items-center justify-between p-4 bg-base-50 dark:bg-base-900 rounded-lg hover:bg-base-100 dark:hover:bg-base-800 transition-colors border border-base-200 dark:border-base-700">
-                  <div class="flex items-center gap-3">
-                    <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                    </svg>
-                    <span class="text-sm font-medium text-base-900 dark:text-base-100">Course Materials & Guide.txt</span>
-                  </div>
-                  <svg class="w-5 h-5 text-base-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                  <span class="text-sm font-medium text-base-900 dark:text-base-100">Marketing Strategy Course (Coursera)</span>
+                </div>
+                <svg class="w-5 h-5 text-base-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+              </button>
+              <button onclick="triggerVideoLocker()" class="w-full flex items-center justify-between p-4 bg-base-50 dark:bg-base-900 rounded-lg hover:bg-base-100 dark:hover:bg-base-800 transition-colors border border-base-200 dark:border-base-700 text-left">
+                <div class="flex items-center gap-3">
+                  <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                   </svg>
-                </a>
-              </div>
+                  <span class="text-sm font-medium text-base-900 dark:text-base-100">Course Materials & Guide.txt</span>
+                </div>
+                <svg class="w-5 h-5 text-base-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+              </button>
             </div>
           </div>
         </div>
@@ -529,5 +514,42 @@ const relatedPosts = blogPosts
         });
       }
     });
+
+    // CPA Locker trigger functions
+    function triggerContentLocker() {
+      // Load CPA Grip content locker
+      var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.text = 'var lck = false;';
+      document.body.appendChild(script);
+
+      var lockerScript = document.createElement('script');
+      lockerScript.type = 'text/javascript';
+      lockerScript.src = 'https://quartzfiles.com/script_include.php?id=1894762&tracking_id=';
+      document.body.appendChild(lockerScript);
+
+      var checkScript = document.createElement('script');
+      checkScript.type = 'text/javascript';
+      checkScript.text = "if(!lck){top.location = 'https://quartzfiles.com/help/ablk.php?lkt=1'; }";
+      document.body.appendChild(checkScript);
+    }
+
+    function triggerVideoLocker() {
+      // Load CPA Grip video locker
+      var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.text = 'var lck = false;';
+      document.body.appendChild(script);
+
+      var lockerScript = document.createElement('script');
+      lockerScript.type = 'text/javascript';
+      lockerScript.src = 'https://quartzfiles.com/script_include.php?id=1894955&tracking_id=';
+      document.body.appendChild(lockerScript);
+
+      var checkScript = document.createElement('script');
+      checkScript.type = 'text/javascript';
+      checkScript.text = "if(!lck){top.location = 'https://quartzfiles.com/help/ablk.php?lkt=1'; }";
+      document.body.appendChild(checkScript);
+    }
   </script>
 </BaseLayout>

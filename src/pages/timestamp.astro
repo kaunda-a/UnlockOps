@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Unix Timestamp Converter - Convert Timestamps">
+  <div class="min-h-screen bg-base-50 dark:bg-base-950">
+    <div class="max-w-2xl mx-auto px-8 py-16">
+      <h1 class="text-4xl font-bold text-base-900 dark:text-base-100 mb-2">Timestamp Converter</h1>
+      <p class="text-base-500 dark:text-base-400 mb-8">Convert between Unix timestamps and human readable dates</p>
+
+      <div class="space-y-6">
+        <div class="bg-white dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-800">
+          <h2 class="font-semibold text-base-900 dark:text-base-100 mb-4">Unix Timestamp → Date</h2>
+          <div class="flex gap-4">
+            <input type="number" id="timestamp" placeholder="e.g., 1704067200" class="flex-1 px-4 py-2 rounded-lg border border-base-200 dark:border-base-700 bg-white dark:bg-base-800 text-base-900 dark:text-base-100">
+            <button id="convertTs" class="px-6 py-2 bg-accent-600 text-white rounded-lg hover:bg-accent-700">Convert</button>
+          </div>
+          <div id="tsResult" class="mt-4 p-4 bg-base-50 dark:bg-base-800 rounded-lg text-base-900 dark:text-base-100 font-mono"></div>
+        </div>
+
+        <div class="bg-white dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-800">
+          <h2 class="font-semibold text-base-900 dark:text-base-100 mb-4">Date → Unix Timestamp</h2>
+          <div class="grid grid-cols-3 gap-4 mb-4">
+            <div>
+              <label class="text-sm text-base-500 dark:text-base-400">Year</label>
+              <input type="number" id="year" value="2025" class="w-full mt-1 px-3 py-2 rounded-lg border border-base-200 dark:border-base-700 bg-white dark:bg-base-800 text-base-900 dark:text-base-100">
+            </div>
+            <div>
+              <label class="text-sm text-base-500 dark:text-base-400">Month</label>
+              <input type="number" id="month" value="1" min="1" max="12" class="w-full mt-1 px-3 py-2 rounded-lg border border-base-200 dark:border-base-700 bg-white dark:bg-base-800 text-base-900 dark:text-base-100">
+            </div>
+            <div>
+              <label class="text-sm text-base-500 dark:text-base-400">Day</label>
+              <input type="number" id="day" value="1" min="1" max="31" class="w-full mt-1 px-3 py-2 rounded-lg border border-base-200 dark:border-base-700 bg-white dark:bg-base-800 text-base-900 dark:text-base-100">
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-4 mb-4">
+            <div>
+              <label class="text-sm text-base-500 dark:text-base-400">Hour</label>
+              <input type="number" id="hour" value="0" min="0" max="23" class="w-full mt-1 px-3 py-2 rounded-lg border border-base-200 dark:border-base-700 bg-white dark:bg-base-800 text-base-900 dark:text-base-100">
+            </div>
+            <div>
+              <label class="text-sm text-base-500 dark:text-base-400">Minute</label>
+              <input type="number" id="minute" value="0" min="0" max="59" class="w-full mt-1 px-3 py-2 rounded-lg border border-base-200 dark:border-base-700 bg-white dark:bg-base-800 text-base-900 dark:text-base-100">
+            </div>
+            <div>
+              <label class="text-sm text-base-500 dark:text-base-400">Second</label>
+              <input type="number" id="second" value="0" min="0" max="59" class="w-full mt-1 px-3 py-2 rounded-lg border border-base-200 dark:border-base-700 bg-white dark:bg-base-800 text-base-900 dark:text-base-100">
+            </div>
+          </div>
+          <button id="convertDate" class="w-full py-2 bg-accent-600 text-white rounded-lg hover:bg-accent-700">Convert to Timestamp</button>
+          <div id="dateResult" class="mt-4 p-4 bg-base-50 dark:bg-base-800 rounded-lg text-base-900 dark:text-base-100 font-mono"></div>
+        </div>
+
+        <div class="bg-white dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-800">
+          <h2 class="font-semibold text-base-900 dark:text-base-100 mb-4">Current Timestamp</h2>
+          <div class="flex items-center justify-between">
+            <p id="now" class="text-2xl font-mono text-base-900 dark:text-base-100">---</p>
+            <button id="copyNow" class="px-4 py-2 bg-base-200 dark:bg-base-800 rounded-lg hover:bg-base-300">Copy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  function formatDate(timestamp: number) {
+    const date = new Date(timestamp * 1000);
+    return `UTC: ${date.toUTCString()}\nLocal: ${date.toLocaleString()}\nISO: ${date.toISOString()}`;
+  }
+
+  document.getElementById('convertTs')?.addEventListener('click', () => {
+    const ts = parseInt((document.getElementById('timestamp') as HTMLInputElement).value);
+    if (ts) document.getElementById('tsResult')!.textContent = formatDate(ts);
+  });
+
+  document.getElementById('convertDate')?.addEventListener('click', () => {
+    const y = parseInt((document.getElementById('year') as HTMLInputElement).value);
+    const m = parseInt((document.getElementById('month') as HTMLInputElement).value) - 1;
+    const d = parseInt((document.getElementById('day') as HTMLInputElement).value);
+    const h = parseInt((document.getElementById('hour') as HTMLInputElement).value);
+    const min = parseInt((document.getElementById('minute') as HTMLInputElement).value);
+    const s = parseInt((document.getElementById('second') as HTMLInputElement).value);
+    const date = new Date(y, m, d, h, min, s);
+    document.getElementById('dateResult')!.textContent = `Unix: ${Math.floor(date.getTime() / 1000)}\nMilliseconds: ${date.getTime()}`;
+  });
+
+  function updateNow() {
+    const now = Math.floor(Date.now() / 1000);
+    document.getElementById('now')!.textContent = now.toString();
+  }
+  updateNow();
+  setInterval(updateNow, 1000);
+  document.getElementById('copyNow')?.addEventListener('click', () => {
+    navigator.clipboard.writeText(document.getElementById('now')!.textContent);
+  });
+</script>

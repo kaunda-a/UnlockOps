@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="QR Code Generator - Create QR Codes Free">
+  <div class="min-h-screen bg-base-50 dark:bg-base-950">
+    <div class="max-w-xl mx-auto px-8 py-16">
+      <h1 class="text-4xl font-bold text-base-900 dark:text-base-100 mb-2">QR Code Generator</h1>
+      <p class="text-base-500 dark:text-base-400 mb-8">Create QR codes for any text or URL</p>
+
+      <div class="bg-white dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-800">
+        <textarea id="text" rows="3" class="w-full px-4 py-3 mb-4 rounded-lg border border-base-200 dark:border-base-700 bg-white dark:bg-base-800 text-base-900 dark:text-base-100" placeholder="Enter text or URL..."></textarea>
+        
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div>
+            <label class="text-sm text-base-500 dark:text-base-400">Size</label>
+            <select id="size" class="w-full mt-1 px-3 py-2 rounded-lg border border-base-200 dark:border-base-700 bg-white dark:bg-base-800 text-base-900 dark:text-base-100">
+              <option value="100">Small (100px)</option>
+              <option value="200" selected>Medium (200px)</option>
+              <option value="300">Large (300px)</option>
+              <option value="500">Extra Large (500px)</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-sm text-base-500 dark:text-base-400">Error Correction</label>
+            <select id="error" class="w-full mt-1 px-3 py-2 rounded-lg border border-base-200 dark:border-base-700 bg-white dark:bg-base-800 text-base-900 dark:text-base-100">
+              <option value="L">Low (7%)</option>
+              <option value="M" selected>Medium (15%)</option>
+              <option value="Q">Quartile (25%)</option>
+              <option value="H">High (30%)</option>
+            </select>
+          </div>
+        </div>
+
+        <button id="generate" class="w-full py-3 bg-gradient-to-r from-accent-600 to-accent-500 text-white font-medium rounded-lg hover:from-accent-700 hover:to-accent-600">
+          Generate QR Code
+        </button>
+      </div>
+
+      <div id="result" class="hidden mt-6 text-center">
+        <div class="bg-white dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-800 inline-block">
+          <img id="qrImage" class="mx-auto" alt="QR Code">
+          <a id="download" href="#" download="qrcode.png" class="mt-4 inline-block text-accent-600 hover:text-accent-700">Download PNG</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  function generate() {
+    const text = (document.getElementById('text') as HTMLTextAreaElement).value;
+    if (!text) return;
+    const size = (document.getElementById('size') as HTMLSelectElement).value;
+    const error = (document.getElementById('error') as HTMLSelectElement).value;
+    const url = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(text)}&errorcorrection=${error}`;
+    document.getElementById('qrImage')!.src = url;
+    document.getElementById('download')!.href = url;
+    document.getElementById('result')?.classList.remove('hidden');
+  }
+  document.getElementById('generate')?.addEventListener('click', generate);
+  (document.getElementById('text') as HTMLTextAreaElement)?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && e.ctrlKey) generate();
+  });
+</script>
