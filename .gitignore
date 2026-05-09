@@ -30,3 +30,11 @@ package-lock.json
 # Local Netlify folder
 .netlify
 .vercel
+
+# Ignore large media files
+public/videos/
+public/ebooks/
+public/warrior-mindset/
+*.pdf
+*.mp4
+*.zip

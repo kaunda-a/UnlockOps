@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const tools = [
+  { name: 'Weather', desc: 'Check current weather for any city', url: '/weather', icon: '☀️' },
+  { name: 'Crypto Prices', desc: 'Live cryptocurrency prices', url: '/crypto', icon: '₿' },
+  { name: 'News', desc: 'Latest tech & business headlines', url: '/news', icon: '📰' },
+  { name: 'Email Validator', desc: 'Verify email addresses', url: '/email-validate', icon: '✉️' },
+  { name: 'Unit Converter', desc: 'Convert temperature, length, weight', url: '/converter', icon: '🔄' },
+  { name: 'Password Generator', desc: 'Create secure passwords', url: '/password', icon: '🔐' },
+  { name: 'QR Code', desc: 'Generate QR codes', url: '/qrcode', icon: '▦' },
+  { name: 'IP Lookup', desc: 'Find IP address & location', url: '/ip', icon: '🌐' },
+  { name: 'JSON Formatter', desc: 'Validate & pretty print JSON', url: '/json', icon: '📋' },
+  { name: 'Base64 Encoder', desc: 'Encode & decode Base64', url: '/base64', icon: '🔤' },
+  { name: 'UUID Generator', desc: 'Generate unique identifiers', url: '/uuid', icon: '🆔' },
+  { name: 'Timestamp', desc: 'Unix timestamp converter', url: '/timestamp', icon: '⏱️' },
+];
+---
+
+<BaseLayout title="Free Developer Tools - Resources">
+  <div class="min-h-screen bg-base-50 dark:bg-base-950">
+    <div class="max-w-6xl mx-auto px-8 py-16">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-base-900 dark:text-base-100 mb-2">Free Developer Tools</h1>
+        <p class="text-base-500 dark:text-base-400">Essential utilities for developers - no signup required</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {tools.map(tool => (
+          <a href={tool.url} class="bg-white dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-800 hover:border-accent-500 dark:hover:border-accent-500 transition-colors group">
+            <div class="text-3xl mb-3">{tool.icon}</div>
+            <h2 class="text-lg font-semibold text-base-900 dark:text-base-100 group-hover:text-accent-600 dark:group-hover:text-accent-400">{tool.name}</h2>
+            <p class="text-base-500 dark:text-base-400 text-sm mt-1">{tool.desc}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</BaseLayout>
